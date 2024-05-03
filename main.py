@@ -187,9 +187,13 @@ display_on = False
 led.value(1)
 time.sleep(1)
 led.value(0)
-button_sim = 0
+timeout_time = time.time()
 while True:
+    if time.time() - timeout_time >= 30:
+        state_index = 0
+        states[state_index]()
     if button.value() == 1 or button_sim == 1:
+        timeout_time = time.time()
         button_sim = 0
         start_time = time.time()
         while button.value() == 1:
